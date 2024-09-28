@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMPERA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styles */
+        body {
+            height: 100vh;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background-color: #000; /* Black background */
+            position: relative;
+            cursor: none; /* Hide default cursor */
+        }
+
+        /* Custom cursor */
+        .custom-cursor {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 0, 0, 0.8); /* Red Cursor */
+            border-radius: 50%;
+            pointer-events: none; /* Prevent cursor interaction */
+            transition: transform 0.1s ease; /* Smooth movement */
+            box-shadow: 0 0 15px rgba(255, 0, 0, 1); /* Glow effect */
+            z-index: 10; /* Above all elements */
+        }
+
+        /* Main container */
+        .container {
+            text-align: center;
+            z-index: 2;
+            color: #FFF; /* White text */
+            position: relative;
+            animation: fadeIn 2s forwards; /* Fade-in effect */
+        }
+
+        /* Title styles */
+        h1 {
+            font-size: 8vw; /* Responsive size */
+            color: #A0C3FF; /* Bright blue */
+            text-shadow: 0 0 40px rgba(160, 195, 255, 1), 0 0 80px rgba(160, 195, 255, 0.5); /* Glow effect */
+            margin-bottom: 20px; /* Spacing */
+        }
+
+        /* Subtext styles */
+        p {
+            font-size: 2vw; /* Responsive font size */
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 10px;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.6); /* Bloom effect */
+            opacity: 0; /* Initially hidden */
+            animation: fadeIn 3s forwards; /* Fade-in animation */
+        }
+
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Button styles */
+        .button-group {
+            margin-top: 30px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #FFF;
+            background-color: rgba(160, 195, 255, 0.2); /* Semi-transparent */
+            padding: 15px 30px; /* Increased padding */
+            margin: 0 10px;
+            border-radius: 5px;
+            font-size: 1.5vw; /* Responsive font size */
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Border color */
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s; /* Transition effects */
+        }
+
+        a:hover {
+            background-color: rgba(160, 195, 255, 0.4); /* On hover */
+            transform: scale(1.05); /* Scale up effect */
+            box-shadow: 0 0 20px rgba(160, 195, 255, 0.7); /* Shadow effect */
+        }
+
+        /* Animated Background */
+        .animated-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3));
+            animation: backgroundAnimation 10s infinite alternate; /* Background animation */
+        }
+
+        @keyframes backgroundAnimation {
+            0% {
+                background-color: rgba(0, 0, 0, 0.9);
+            }
+            100% {
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        /* Footer styles */
+        footer {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2vw;
+        }
+
+        /* Navigation styles */
+        nav {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 2;
+        }
+
+        nav a {
+            background-color: rgba(255, 255, 255, 0.1);
+            font-size: 1.2vw;
+            padding: 12px 24px;
+            border-radius: 5px;
+            color: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.4); /* Shadow effect */
+        }
+
+        /* Glowing border for buttons */
+        .button-group a:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(160, 195, 255, 0.9);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-background"></div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="cursor"></div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>COMPERA</h1>
+        <p id="dynamicText">We Host The Best Seasons | Plug, play, win.</p>
+        <div class="button-group">
+            <a href="#">Seasons</a>
+            <a href="#">Support</a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#">Discord</a>
+    </nav>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 COMPERA. All Rights Reserved.
+    </footer>
+
+    <script>
+        // Custom cursor functionality
+        const cursor = document.getElementById('cursor');
+
+        // Smooth cursor movement
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Fade in text
+        window.onload = () => {
+            const subtitle = document.querySelector('p');
+            subtitle.style.opacity = '1'; // Make subtitle visible
+        };
+
+        // Text typing effect for dynamic text
+        const dynamicText = document.getElementById('dynamicText');
+        const textArray = [
+            "We Host The Best Seasons | Plug, play, win.",
+            "Join our community for support!",
+            "Enhance your gaming experience!",
+            "Stay tuned for updates!",
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+
+        function typeText() {
+            if (charIndex < textArray[textIndex].length) {
+                dynamicText.textContent += textArray[textIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(typeText, 100); // Typing speed
+            } else {
+                setTimeout(() => {
+                    dynamicText.textContent = ''; // Clear text
+                    textIndex = (textIndex + 1) % textArray.length; // Loop through text
+                    charIndex = 0;
+                    typeText();
+                }, 2000); // Pause before typing next text
+            }
+        }
+
+        typeText(); // Start typing effect
+
+        // Sound effect on button hover
+        const audio = new Audio('https://www.soundjay.com/button/sounds/button-3.mp3'); // Example sound
+
+        document.querySelectorAll('.button-group a').forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                audio.currentTime = 0; // Reset sound
+                audio.play(); // Play sound
+            });
+        });
+
+        // Background particle effect
+        const particles = [];
+        const particleCount = 100;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * window.innerWidth;
+                this.y = Math.random() * window.innerHeight;
+                this.size = Math.random() * 5 + 1;
+                this.speedX = Math.random() * 3 - 1.5;
+                this.speedY = Math.random() * 3 - 1.5;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Bounce off walls
+                if (this.x < 0 || this.x > window.innerWidth) this.speedX *= -1;
+                if (this.y < 0 || this.y > window.innerHeight) this.speedY *= -1;
+            }
+
+            draw(context) {
+                context.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                context.beginPath();
+                context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                context.fill();
+            }
+        }
+
+        function initParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            document.body.appendChild(canvas);
+
+            function animate() {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw(context);
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        initParticles();
+        animateParticles();
+    </script>
+</body>
+</html>
