@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>CompEra - Seasons</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Custom Cursor */
+    body {
+      cursor: none;
+    }
+
+    .custom-cursor {
+      width: 20px;
+      height: 20px;
+      background-color: rgba(0, 225, 255, 0.9); /* Blue glowing center */
+      border: 2px solid #FF0000; /* Iron Man's red border */
+      border-radius: 50%;
+      position: fixed;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 999;
+      transition: transform 0.1s ease, background-color 0.3s ease;
+      box-shadow: 0 0 20px rgba(255, 223, 0, 0.8); /* Gold glow, inspired by Iron Man */
+    }
+
+    /* Background Video */
+    .background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 50px 0;
+      background-color: rgba(31, 31, 31, 0.8);
+      border-bottom: 3px solid #333;
+    }
+
+    h1 {
+      font-size: 4em;
+      font-weight: 700;
+      letter-spacing: 5px;
+      color: #00E1FF;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      animation: titleFadeIn 2s ease-out;
+    }
+
+    @keyframes titleFadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Main Section */
+    section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 100px 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      border-bottom: 3px solid #2a2a2a;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section:nth-child(even) {
+      background-color: rgba(23, 23, 23, 0.8);
+    }
+
+    .season-content {
+      max-width: 600px;
+      z-index: 2;
+    }
+
+    .season-title {
+      font-size: 2.8em;
+      margin-bottom: 25px;
+      color: #00E1FF;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: fadeInLeft 1.2s ease-out;
+    }
+
+    @keyframes fadeInLeft {
+      0% {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .season p {
+      font-size: 1.2em;
+      line-height: 1.7;
+      color: #ccc;
+    }
+
+    .season img {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 15px;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      opacity: 0.9;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+    }
+
+    .season img:hover {
+      transform: scale(1.08);
+      opacity: 1;
+      box-shadow: 0 0 30px rgba(0, 225, 255, 0.9);
+    }
+
+    /* Button */
+    .btn {
+      padding: 15px 30px;
+      font-size: 1.1em;
+      text-transform: uppercase;
+      background-color: #00E1FF;
+      color: #000;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(0, 225, 255, 0.7);
+      margin-top: 20px;
+    }
+
+    .btn:hover {
+      background-color: #ffffff;
+      color: #00E1FF;
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(0, 225, 255, 1);
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px;
+      text-align: center;
+      background-color: rgba(31, 31, 31, 0.8);
+      border-top: 3px solid #333;
+    }
+
+    footer p {
+      font-size: 0.9em;
+      color: #888;
+    }
+
+    /* Smooth Animations */
+    .animate-in {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.6s ease;
+    }
+
+    .animate-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor"></div>
+
+  <!-- Background Video -->
+  <video class="background-video" autoplay muted loop>
+    <source src="Chapter 2 Season 4 Map Nostalgia… - Nostalgia (1080p60, h264, youtube).mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Audio -->
+  <audio id="background-audio" loop>
+    <source src="Chapter 2 Season 4 Map Nostalgia… - Nostalgia (youtube).mp3" type="audio/mp3">
+    Your browser does not support the audio tag.
+  </audio>
+
+  <!-- Header -->
+  <header>
+    <h1>CompEra</h1>
+  </header>
+
+  <!-- Section 1: Chapter 2 Season 4 -->
+  <section class="season animate-in">
+    <div class="season-content">
+      <h2 class="season-title">Chapter 2 - Season 4</h2>
+      <p>Chapter 2 Season 4 was an exciting collaboration between Fortnite and Marvel. It brought iconic superheroes to the island, such as Iron Man, Thor, and Wolverine. Engage in thrilling battles and save the island from the impending Nexus War!</p>
+      <button class="btn" onclick="alert('Exploring Chapter 2 Season 4!')">Explore Season</button>
+    </div>
+    <img src="https://cdn.gamerjournalist.com/primary/2020/09/Fortnite-Chapter-2-Season-4-Challenges-Guide.jpg" alt="Chapter 2 Season 4">
+  </section>
+
+  <!-- Section 2: Chapter 3 Season 2 -->
+  <section class="season animate-in">
+    <div class="season-content">
+      <h2 class="season-title">Chapter 3 - Season 2</h2>
+      <p>In Chapter 3 Season 2, the war between the Imagined Order and The Resistance took center stage. This season introduced Zero Build modes, revolutionizing gameplay as players engaged in combat without the traditional building mechanics.</p>
+      <button class="btn" onclick="alert('Exploring Chapter 3 Season 2!')">Explore Season</button>
+    </div>
+    <img src="https://images.wallpapersden.com/image/download/fortnite-chapter-3-season-2-resistance_bWdobW2UmZqaraWkpJRmbmdlrWZlbWU.jpg" alt="Chapter 3 Season 2">
+  </section>
+
+  <!-- Section 3: Chapter 2 Season 2 -->
+  <section class="season animate-in">
+    <div class="season-content">
+      <h2 class="season-title">Chapter 2 - Season 2</h2>
+      <p>Chapter 2 Season 2, also known as "Top Secret," was a spy-themed season featuring factions like Ghost and Shadow. Players chose sides and took on missions from agents such as Midas and Brutus.</p>
+      <button class="btn" onclick="alert('Exploring Chapter 2 Season 2!')">Explore Season</button>
+    </div>
+    <img src="https://www.pcgamesn.com/wp-content/uploads/2020/02/fortnite-chapter-2-season-2-end-date.jpg" alt="Chapter 2 Season 2">
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 CompEra | Fortnite Chapter Seasons. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Custom Cursor Effect
+    const cursor = document.querySelector('.custom-cursor');
+
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = `${e.clientX}px`;
+      cursor.style.top = `${e.clientY}px`;
+    });
+
+    document.addEventListener('mousedown', () => {
+      cursor.style.transform = 'scale(0.8)';
+      cursor.style.backgroundColor = '#FF0000'; /* Iron Man's Red when clicked */
+    });
+
+    document.addEventListener('mouseup', () => {
+      cursor.style.transform = 'scale(1)';
+      cursor.style.backgroundColor = 'rgba(0, 225, 255, 0.9)'; /* Blue glowing center */
+    });
+
+    // Animate sections on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    });
+
+    document.querySelectorAll('.animate-in').forEach(section => {
+      observer.observe(section);
+    });
+
+    // Play audio on first interaction
+    const audio = document.getElementById('background-audio');
+
+    function playAudio() {
+      audio.play().catch(error => {
+        console.error("Autoplay prevented: " + error);
+      });
+      document.removeEventListener('click', playAudio); // Ensure the event listener is removed after the first click
+    }
+
+    // Add an event listener to play audio when the user clicks anywhere on the page
+    document.addEventListener('click', playAudio);
+  </script>
+</body>
+</html>
